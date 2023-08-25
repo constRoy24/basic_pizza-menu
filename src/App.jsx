@@ -23,7 +23,7 @@ const pizzaData = [
     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
     price: 12,
     photoName: "pizzas/spinaci.jpg",
-    soldOut: false,
+    soldOut: true,
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const pizzaData = [
     ingredients: "Tomato, mozarella, and pepperoni",
     price: 15,
     photoName: "pizzas/salamino.jpg",
-    soldOut: true,
+    soldOut: false,
   },
   {
     id: 6,
@@ -47,7 +47,7 @@ const pizzaData = [
     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
     price: 18,
     photoName: "pizzas/prosciutto.jpg",
-    soldOut: false,
+    soldOut: true,
   },
 ];
 
@@ -102,15 +102,15 @@ const Menu = () => {
 };
 
 const Pizza = ({ pizzaObj }) => {
-  const { name, ingredients, photoName, price } = pizzaObj;
+  const { name, ingredients, photoName, price, soldOut } = pizzaObj;
   return (
     <>
-      <li className="pizza">
+      <li className={`pizza ${soldOut ? "sold-out" : ""}`}>
         <img src={photoName} alt={name} />
         <div>
           <h3>{name}</h3>
           <p>{ingredients}</p>
-          <span>{price}</span>
+          <span>{soldOut ? "SOLD OUT" : price}</span>
         </div>
       </li>
     </>
@@ -131,7 +131,7 @@ const Pizza = ({ pizzaObj }) => {
 
 const Footer = () => {
   const hour = new Date().getHours();
-  const openHour = 12;
+  const openHour = 10;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   // const Opengreet = "We're currently open"
